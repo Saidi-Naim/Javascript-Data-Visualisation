@@ -5,6 +5,14 @@ let listGlobal = [];
 let listGlobal2 = [];
 
 
+let ths = document.querySelectorAll("#table1 tbody tr")[0].querySelectorAll("th");
+let years = [];
+ths.forEach(th => {
+    if(th.innerText != ""){
+    years.push(th.innerText);
+    }
+})
+
 
 trs.forEach( tr => {
     let miniList = []
@@ -30,6 +38,7 @@ const ctx = document.getElementById('graph1').getContext('2d');
     btnContainer.style.flexWrap = 'wrap';
     btnContainer.style.paddingBottom = '100px';
     btnContainer.style.backgroundColor = 'white';
+    btnContainer.style.textAlign = 'center';
 
     var myChart=null;
 
@@ -41,7 +50,9 @@ const ctx = document.getElementById('graph1').getContext('2d');
         btn.setAttribute('index', i)
         
         listGlobal[parseInt(btn.getAttribute('index'))].shift()
-        // let list = listGlobal[parseInt(btn.getAttribute('index'))]
+        btn.style.borderColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        btn.style.backgroundColor = "#fff";
+        btn.style.margin = "3px";
 
         btn.onclick= (() => {
             if(myChart != null){
@@ -51,9 +62,9 @@ const ctx = document.getElementById('graph1').getContext('2d');
         myChart = new Chart(ctx, {
                type: 'bar',
                data: {
-                   labels: ['2002', '2003', '2004', '2005', '2006','2007','2008','2009','2010', '2011', '2012'],
+                   labels: years,
                    datasets: [{
-                       label: 'Crimes recorded by the police',
+                       label: 'Numbers Of Crimes',
                        data: listGlobal[parseInt(btn.getAttribute('index'))],
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
@@ -87,6 +98,14 @@ const ctx = document.getElementById('graph1').getContext('2d');
 }
 }
 
+////////////////////////////////////////////////// Second Graph //////////////////////////////////////////////////////////////////
+let ths2 = document.querySelectorAll("#table2 thead tr")[0].querySelectorAll("th");
+let years2 = [];
+ths2.forEach((th , i) => {
+    if(i > 1){
+    years2.push(th.innerText);
+    }
+})
 
 
 trs2.forEach( tr => {
@@ -104,27 +123,30 @@ trs2.forEach( tr => {
 
     listGlobal2.push(miniList2)
 });
-const ctx2 = document.getElementById('graph2').getContext('2d');
 
+const ctx2 = document.getElementById('graph2').getContext('2d');
+    let button = document.querySelector('button');
     const btnContainer2 = document.createElement('div');
     btnContainer2.setAttribute('id', 'btns2');
     document.getElementById('graph2').after(btnContainer2);
     btnContainer2.style.display = 'flex';
     btnContainer2.style.flexWrap = 'wrap';
-    // btnContainer2.style.paddingBottom = 'px';
     btnContainer2.style.backgroundColor = 'white';
+    btnContainer2.style.textAlign = 'center';
 
     var myChart2=null;
 
     for(let j = 0; j < listGlobal2.length; j++){
         let btn2 = document.createElement('button')
-        if(j != 0){
+        if(j >= 0){
         btn2.innerText = listGlobal2[j][0]
         btnContainer2.appendChild(btn2)
         btn2.setAttribute('index', j)
-        
+
         listGlobal2[parseInt(btn2.getAttribute('index'))].shift()
-        // let list = listGlobal[parseInt(btn.getAttribute('index'))]
+        btn2.style.borderColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        btn2.style.backgroundColor = "#fff";
+        btn2.style.margin = "3px";
 
         btn2.onclick= (() => {
             if(myChart2 != null){
@@ -134,7 +156,7 @@ const ctx2 = document.getElementById('graph2').getContext('2d');
         myChart2 = new Chart(ctx2, {
                type: 'bar',
                data: {
-                   labels: ['2007-09', '2010-12'],
+                   labels: years2,
                    datasets: [{
                        label: 'Homicide',
                        data: listGlobal2[parseInt(btn2.getAttribute('index'))],
