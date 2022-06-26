@@ -8,7 +8,7 @@
 
 - duration: `5 days`  (27/06/22 -- 09:00 a.m.)
 
-- ![Link Page](https://saidi-naim.github.io/Javascript-Data-Visualisation/)
+- [Link Page](https://saidi-naim.github.io/Javascript-Data-Visualisation/)
 
    
 
